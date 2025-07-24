@@ -1,0 +1,4 @@
+{
+	"title": "About",
+	"content": "<ul><li><a class='main link' href='/'>Home</a></li><li><a class='active about link' href='/about'>About</a></li><li><a class='link contacts' href='/contacts'>Contacts</a></li><li><a class='404 link' href='/gukv6'>404</a></li><h3>We are the champions from Dusty Frontend School</h3>"
+}

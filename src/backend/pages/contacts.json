@@ -1,0 +1,4 @@
+{
+  "title": "Contacts",
+  "content": "<ul><li><a class='main link' href='/'>Home</a></li><li><a class='about link' href='/about'>About</a></li><li><a class='link active contacts' href='/contacts'>Contacts</a></li><li><a class='404 link' href='/kbht6'>404</a></li><p>Under construction</p>"
+}
