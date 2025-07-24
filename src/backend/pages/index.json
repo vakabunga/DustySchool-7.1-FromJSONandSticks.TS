@@ -1,0 +1,4 @@
+{
+  "title": "Home page!",
+  "content": "<ul><li><a class='active link main' href='/'>Home</a></li><li><a class='about link' href='/about'>About</a></li><li><a class='link contacts' href='/contacts'>Contacts</a></li><li><a class='404 link' href='/lkjtasdfrrr4fu'>404</a></li>"
+}
