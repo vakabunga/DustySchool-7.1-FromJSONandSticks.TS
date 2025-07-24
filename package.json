@@ -1,0 +1,25 @@
+{
+  "name": "dustyschool-7.1-fromjsonandsticks.ts",
+  "version": "1.0.0",
+  "main": "frontend/index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vakabunga/DustySchool-7.1-FromJSONandSticks.TS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vakabunga/DustySchool-7.1-FromJSONandSticks.TS/issues"
+  },
+  "homepage": "https://github.com/vakabunga/DustySchool-7.1-FromJSONandSticks.TS#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "24.1.0",
+    "typescript": "5.8.3"
+  }
+}
