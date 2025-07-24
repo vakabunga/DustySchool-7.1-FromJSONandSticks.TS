@@ -4,7 +4,12 @@
   "main": "frontend/index.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:backend": "ncc build src/backend/index.ts -o dist/backend",
+    "build:frontend": "ncc build src/frontend/index.ts -o dist/frontend",
+    "copy:assets": "cpx \"src/backend/**/*.json\" dist/backend && cpx \"src/frontend/*.{html,css}\" dist/frontend",
+    "build": "rm -rf dist && npm run build:backend && npm run build:frontend && npm run copy:assets",
+    "start": "node dist/frontend/index.js",
+    "start:back": "node dist/backend/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +25,9 @@
   "description": "",
   "devDependencies": {
     "@types/node": "24.1.0",
+    "@vercel/ncc": "0.38.3",
+    "cpx": "1.5.0",
+    "dotenv": "17.2.0",
     "typescript": "5.8.3"
   }
 }
