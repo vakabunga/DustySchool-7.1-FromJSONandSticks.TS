@@ -1,0 +1,16 @@
+a.active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: #a14747
+}
+
+a:visited {
+  color: #0000ee;
+}
+
+ul {
+  display: flex;
+  gap: 10px;
+  list-style: ' / ';
+}
