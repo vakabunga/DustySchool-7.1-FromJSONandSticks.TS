@@ -1,4 +1,4 @@
-import { readFile, access } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import http from 'http';
 import path from 'path';
 
@@ -7,31 +7,34 @@ async function readJsonFile(filePath: string): Promise<string> {
 }
 
 const server = http.createServer(async (req, res) => {
-	const url = req.url;
-	const homeUrls = 'dist/backend/pages';
-	let filePath: string;
+	const url = req.url || '/';
 
-	res.writeHead(200, {
-		'Content-Type': 'application/json',
-		'Access-control-allow-origin': '*',
-	});
+	const homeUrls = 'dist/backend/pages/';
+	const data404 = JSON.stringify({title: '404. Page not found', content: 'Return to a <a class="main link" href="/">Home page</a>'});
 
-	if (url === '/') {
-		filePath = path.join(process.cwd(), `${homeUrls}${url}index.json`);
-	} else {
-		try {
-			await access(path.join(process.cwd(), `${homeUrls}${url}.json`));
-			filePath = path.join(process.cwd(), `${homeUrls}${url}.json`);
-		} catch {
-			filePath = path.join(process.cwd(), `${homeUrls}/404.json`);
-		}
-	}
+	const pageName = url === '/' ? 'index' : url.slice(1);
 
-	readJsonFile(filePath)
-		.then((jsonData) => {
-			res.write(jsonData);
-			res.end();
+	const filePath = path.join(process.cwd(), `${homeUrls}${pageName}.json`);
+
+	try {
+		const jsonData = await readFile(filePath, 'utf-8');
+
+		res.writeHead(200, {
+			'Content-Type': 'application/json',
+			'Access-control-allow-origin': '*',
 		});
+
+		res.write(jsonData);
+		res.end();
+	} catch {
+
+		res.writeHead(404, {
+			'Content-Type': 'application/json',
+			'Access-control-allow-origin': '*',
+		});
+
+		res.end(data404);
+	}
 });
 
 const port = process.env.PORT || 3000;
