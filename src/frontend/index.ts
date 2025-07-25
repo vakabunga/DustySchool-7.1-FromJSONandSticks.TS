@@ -23,14 +23,16 @@ pageContent.addEventListener('click', (event: MouseEvent) => {
 	if (target.classList.contains('link')) {
 		const link = target.href;
 		const pageName = link.substring(serverUrl.length);
-		
+
 		pageDataRequest(pageName)
-			.then((data) => renderPage(data));
+			.then((data) => renderPage(data))
+			.catch((error) => renderPage(error));
 	}
 });
 
 function pageDataRequest(pageName: string) {
-	return fetch(serverUrl + pageName).then((response) => response.json());
+	return fetch(serverUrl + pageName)
+		.then((response) => response.json());
 }
 
 function renderPage(data: PageData): void {
@@ -38,6 +40,7 @@ function renderPage(data: PageData): void {
 	pageContent.innerHTML = data.content;
 }
 
-pageDataRequest('').then((data) => {
-	renderPage(data);
-});
+pageDataRequest('')
+	.then((data) => {
+		renderPage(data);
+	});
