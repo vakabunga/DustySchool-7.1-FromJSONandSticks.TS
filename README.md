@@ -44,6 +44,5 @@
 1. `git clone`
 2. `npm install`
 3. `npm run build`
-4. `npm start` (*creates http-server*)
-5. `npm run start:back` (*creates node server*)
-6. go to <http://localhost:8080>
+4. `npm start` (*starts node server*)
+5. go to <http://localhost:3000>

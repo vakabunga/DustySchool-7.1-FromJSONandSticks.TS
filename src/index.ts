@@ -2,15 +2,26 @@ import { readFile } from 'fs/promises';
 import http from 'http';
 import path from 'path';
 
-async function readJsonFile(filePath: string): Promise<string> {
-	return await readFile(filePath, 'utf-8');
-}
+type JsonData = {
+	title: string;
+	content: string;
+};
 
 const server = http.createServer(async (req, res) => {
 	const url = req.url || '/';
 
-	const homeUrls = 'dist/backend/pages/';
-	const data404 = JSON.stringify({title: '404. Page not found', content: 'Return to a <a class="main link" href="/">Home page</a>'});
+	const homeUrls = 'dist/pages/';
+
+	const data404: JsonData = {
+		title: '404. Page not found',
+		content: 'Return to a <a href="/">Home page</a>',
+	};
+
+	function pageHtml(data: JsonData): string {
+		return `
+			<h1>${data.title}</h1>
+			<div>${data.content}</div>`;
+	}
 
 	const pageName = url === '/' ? 'index' : url.slice(1);
 
@@ -20,20 +31,18 @@ const server = http.createServer(async (req, res) => {
 		const jsonData = await readFile(filePath, 'utf-8');
 
 		res.writeHead(200, {
-			'Content-Type': 'application/json',
-			'Access-control-allow-origin': '*',
+			'Content-Type': 'text/html',
 		});
 
-		res.write(jsonData);
+		res.write(pageHtml(JSON.parse(jsonData)));
 		res.end();
 	} catch {
 
 		res.writeHead(404, {
-			'Content-Type': 'application/json',
-			'Access-control-allow-origin': '*',
+			'Content-Type': 'text/html',
 		});
-
-		res.end(data404);
+		
+		res.end(pageHtml(data404));
 	}
 });
 
